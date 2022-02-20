@@ -4,6 +4,7 @@ import styles from "../../styles/Home.module.css";
 import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import * as mongoose from "mongoose";
 
 export const Container = styled.div`
   display: grid;
@@ -23,7 +24,7 @@ export const Header = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: space-between; */
 
   input {
     outline: none;
@@ -40,7 +41,17 @@ export const Main = styled.div`
   font-family: "Anonymous Pro", monospace, "Courier New", Courier;
 
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+
+  /* justify-content: center; */
+`;
+
+export const PanelLogo = styled.div`
+  width: 100px;
+  height: 100%;
+  background-color: green;
 `;
 
 export async function getServerSideProps(context) {
@@ -65,10 +76,27 @@ export async function getServerSideProps(context) {
   };
 }
 
+const searchDatabase = async (searchWord) => {
+  // const URI = `mongodb+srv://${process.env.NEXT_PUBLIC_ACCOUNT}:${process.env.NEXT_PUBLIC_PASSWORD}@apicluster.5xlor.mongodb.net/Gaules?retryWrites=true&w=majority`;
+  // await mongoose.connect(
+  //   `mongodb+srv://${process.env.NEXT_PUBLIC_ACCOUNT}:${process.env.NEXT_PUBLIC_PASSWORD}@apicluster.5xlor.mongodb.net/Gaules?retryWrites=true&w=majority`,
+  //   {
+  //     useNewUrlParser: true,
+  //     useUnifiedTopology: true,
+  //   }
+  // );
+  // const client = await mongoose.connection;
+  //
+  // const client = await mongoose.connection;
+  // const data = await client
+  //   .collection("significados")
+  //   .findOne({ word: "Rufus" });
+  // console.log(data);
+};
+
 export default function Home(data) {
   const [items, setItems] = useState([]);
   const [value, setValue] = useState("");
-
   useEffect(() => {
     const done = async () => {
       setItems(data.data);
@@ -90,12 +118,13 @@ export default function Home(data) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <PanelLogo></PanelLogo>
+        <form onSubmit={(e) => handleSubmit(e)} style={{ margin: "auto" }}>
           <input
             type="text"
             placeholder="Pesquise uma frase.."
             value={value}
-            onChange={(e) => {
+            onChange={async (e) => {
               setValue(e.currentTarget.value);
             }}
           />

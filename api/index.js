@@ -60,7 +60,7 @@ app.post("/add", async (req, res) => {
 
   try {
     const value = await schema.validateAsync({
-      word: req.body.word,
+      word: req.body.word.toLowerCase(),
       meaning: req.body.meaning,
     });
 
@@ -72,6 +72,25 @@ app.post("/add", async (req, res) => {
   }
 
   //
+});
+
+app.get("/:word", async (req, res) => {
+  const word = req.params.word;
+
+  await mongoose.connect(
+    `mongodb+srv://${process.env.ACCOUNT}:${process.env.PASSWORD}@apicluster.5xlor.mongodb.net/Gaules?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  );
+
+  const client = await mongoose.connection;
+
+  const data = await client.collection("significados").findOne({ word: word });
+  console.log(data);
+
+  return res.status(200).json(data);
 });
 
 app.listen(PORT, () => console.log(`server connect`));
