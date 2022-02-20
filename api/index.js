@@ -87,10 +87,25 @@ app.get("/:word", async (req, res) => {
 
   const client = await mongoose.connection;
 
-  const data = await client.collection("significados").findOne({ word: word });
+  // db.users.findOne({"username" : {$regex : "son"}});
+  // let data = await client.collection("significados").findOne({ word });
+  let data = await client
+    .collection("significados")
+    .findOne({ word: { $regex: word } });
   console.log(data);
+  if (data) {
+    data = capitalize(data);
+  }
 
   return res.status(200).json(data);
 });
+
+function capitalize(s) {
+  return {
+    _id: s._id,
+    word: s.word[0].toUpperCase() + s.word.slice(1),
+    meaning: s.meaning,
+  };
+}
 
 app.listen(PORT, () => console.log(`server connect`));

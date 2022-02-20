@@ -45,13 +45,17 @@ export const Main = styled.div`
   flex-direction: column;
   align-items: center;
 
+  padding: 20px;
   /* justify-content: center; */
 `;
 
-export const PanelLogo = styled.div`
-  width: 100px;
+export const PanelLogo = styled.h1`
+  width: 200px;
   height: 100%;
-  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
 `;
 
 export async function getServerSideProps(context) {
@@ -118,7 +122,7 @@ export default function Home(data) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header>
-        <PanelLogo></PanelLogo>
+        <PanelLogo>Gaulês Verso</PanelLogo>
         <form onSubmit={(e) => handleSubmit(e)} style={{ margin: "auto" }}>
           <input
             type="text"
