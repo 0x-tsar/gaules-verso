@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
+    "babel-plugin-styled-components": "^2.0.3",
     "mongoose": "^6.2.2",
     "next": "12.1.0",
     "react": "17.0.2",

@@ -91,11 +91,18 @@ app.get("/:word", async (req, res) => {
 
   let data = await client
     .collection("significados")
-    .findOne({ word: { $regex: word } });
+    .find({ word: { $regex: word } })
+    .toArray();
   console.log(data);
-  if (data) {
-    data = capitalize(data);
-  }
+
+  // let data = await client
+  //   .collection("significados")
+  //   .findOne({ word: { $regex: word } });
+  // console.log(data);
+
+  // if (data) {
+  //   data = capitalize(data);
+  // }
 
   return res.status(200).json(data);
 });

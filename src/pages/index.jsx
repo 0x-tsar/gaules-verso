@@ -4,7 +4,6 @@ import styles from "../../styles/Home.module.css";
 import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import * as mongoose from "mongoose";
 
 export const Container = styled.div`
   display: grid;
@@ -58,52 +57,41 @@ export const PanelLogo = styled.h1`
   margin-left: 50px;
 `;
 
-export async function getServerSideProps(context) {
-  // const data = await axios({
-  //   method: "post",
-  //   url: "http://localhost:5002/",
-  //   data: {
-  //     firstName: "Finn",
-  //     lastName: "Williams",
-  //   },
-  // });
+// export async function getServerSideProps(context) {
+//   // const data = await axios({
+//   //   method: "post",
+//   //   url: "http://localhost:5002/",
+//   //   data: {
+//   //     firstName: "Finn",
+//   //     lastName: "Williams",
+//   //   },
+//   // });
 
-  const { data } = await axios({
-    method: "get",
-    url: "http://localhost:5002/",
-  });
+//   const { data } = await axios({
+//     method: "get",
+//     url: "http://localhost:5002/",
+//   });
 
-  return {
-    props: {
-      data: data,
-    },
-  };
-}
+//   return {
+//     props: {
+//       data: data,
+//     },
+//   };
+// }
 
-const searchDatabase = async (searchWord) => {
-  // const URI = `mongodb+srv://${process.env.NEXT_PUBLIC_ACCOUNT}:${process.env.NEXT_PUBLIC_PASSWORD}@apicluster.5xlor.mongodb.net/Gaules?retryWrites=true&w=majority`;
-  // await mongoose.connect(
-  //   `mongodb+srv://${process.env.NEXT_PUBLIC_ACCOUNT}:${process.env.NEXT_PUBLIC_PASSWORD}@apicluster.5xlor.mongodb.net/Gaules?retryWrites=true&w=majority`,
-  //   {
-  //     useNewUrlParser: true,
-  //     useUnifiedTopology: true,
-  //   }
-  // );
-  // const client = await mongoose.connection;
-  //
-  // const client = await mongoose.connection;
-  // const data = await client
-  //   .collection("significados")
-  //   .findOne({ word: "Rufus" });
-  // console.log(data);
-};
-
-export default function Home(data) {
+export default function Home() {
   const [items, setItems] = useState([]);
   const [value, setValue] = useState("");
   useEffect(() => {
+    setItems([]);
     const done = async () => {
-      setItems(data.data);
+      const { data } = await axios({
+        method: "get",
+        url: "http://localhost:5002/",
+      });
+
+      // console.log(data);
+      setItems(data);
     };
     done();
   }, []);
@@ -130,23 +118,57 @@ export default function Home(data) {
             value={value}
             onChange={async (e) => {
               setValue(e.currentTarget.value);
+
+              await axios({
+                method: "get",
+                url: `http://localhost:5002/${e.currentTarget.value}`,
+              })
+                .then((result) => {
+                  setItems(result.data);
+                })
+                .catch((err) => {
+                  setItems(err);
+                });
+
+              // console.log(data);
             }}
           />
         </form>
       </Header>
       <Main>
-        {items.map((item, key) => {
-          return (
-            <div key={key}>
-              <p style={{ marginBottom: "5px" }}> - {item.word}</p>
-              <div>
-                <span style={{ fontStyle: "italic", fontSize: "20px" }}>
-                  {item.meaning}
-                </span>
+        {/* {console.log(items)} */}
+        {/* {items ? <div>there is</div> : <div>NOT FOUND</div>} */}
+        {/* {items && items ? <div>there is</div> : <div>NOT FOUND</div>} */}
+
+        {/* {console.log(items.length)} */}
+        {items && items ? (
+          Object.keys(items).map((item, key) => {
+            return (
+              <div key={key}>
+                <div>{items[item].word}</div>
+                <div>{items[item].meaning}</div>
+                <br></br>
+                <br></br>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          // items.map((item, key) => {
+          //   return <div key={key}>ok</div>;
+          // })
+          <div>nothing..</div>
+        )}
+
+        {/* {console.log(Object.keys(items).length)} */}
+        {/* {console.log(items.length && items)} */}
+        {/* {console.log(items)} */}
+        {/* {items ? <div>THERE IS</div> : <div>zero</div>} */}
+        {/* {items.length > 1 ? <div>THERE IS</div> : <div>zero</div>} */}
+
+        {/* //
+        //
+        //
+        // */}
       </Main>
     </Container>
   );
