@@ -5,10 +5,12 @@ const { createClient } = require("redis");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const Joi = require("joi");
+const cors = require("cors");
 
 const app = express();
 app.use(helmet());
 app.use(morgan("dev"));
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5002;
@@ -87,8 +89,6 @@ app.get("/:word", async (req, res) => {
 
   const client = await mongoose.connection;
 
-  // db.users.findOne({"username" : {$regex : "son"}});
-  // let data = await client.collection("significados").findOne({ word });
   let data = await client
     .collection("significados")
     .findOne({ word: { $regex: word } });
