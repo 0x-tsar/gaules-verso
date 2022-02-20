@@ -18,10 +18,11 @@ app.get("/", async (req, res) => {
     await redisClient.connect();
   }
 
-  let dataCached = await redisClient.get("users");
+  let dataCached = await redisClient.get("significados");
+
   if (!dataCached) {
     await mongoose.connect(
-      `mongodb+srv://${process.env.ACCOUNT}:${process.env.PASSWORD}@apicluster.5xlor.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+      `mongodb+srv://${process.env.ACCOUNT}:${process.env.PASSWORD}@apicluster.5xlor.mongodb.net/Gaules?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -29,13 +30,10 @@ app.get("/", async (req, res) => {
     );
 
     const client = await mongoose.connection;
-    const data = await client.collection("users").find({}).toArray();
-    data.filter((item) => {
-      delete item.password;
-      return item;
-    });
+    const data = await client.collection("significados").find({}).toArray();
 
-    await redisClient.setEx("users", 60, JSON.stringify(data));
+    await redisClient.setEx("significados", 60, JSON.stringify(data));
+
     return res.json(data);
   } else {
     return res.json(JSON.parse(dataCached));
