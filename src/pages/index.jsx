@@ -12,7 +12,10 @@ export const Container = styled.div`
   grid-template-areas:
     "header"
     "main";
-  background-color: #373b3e;
+  /* background-color: rgb(239, 141, 21); */
+  /* background-color: #373b3e; */
+  /* background: linear-gradient(rgba(200, 0, 200), rgba(100, 0, 200)); */
+  background: linear-gradient(100deg, rgba(200, 0, 200), rgb(239, 141, 21));
   color: white;
 `;
 
@@ -45,6 +48,8 @@ export const Main = styled.div`
   align-items: center;
 
   padding: 20px;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.311);
+  /* box-shadow: 2px 2px rgba(0, 0, 0); */
   /* justify-content: center; */
 `;
 
@@ -98,7 +103,7 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(value);
+    // console.log(value);
     setValue("");
   };
 
