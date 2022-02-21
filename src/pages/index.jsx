@@ -62,28 +62,6 @@ export const PanelLogo = styled.h1`
   margin-left: 50px;
 `;
 
-// export async function getServerSideProps(context) {
-//   // const data = await axios({
-//   //   method: "post",
-//   //   url: "http://localhost:5002/",
-//   //   data: {
-//   //     firstName: "Finn",
-//   //     lastName: "Williams",
-//   //   },
-//   // });
-
-//   const { data } = await axios({
-//     method: "get",
-//     url: "http://localhost:5002/",
-//   });
-
-//   return {
-//     props: {
-//       data: data,
-//     },
-//   };
-// }
-
 export default function Home() {
   const [items, setItems] = useState([]);
   const [value, setValue] = useState("");
@@ -151,8 +129,6 @@ export default function Home() {
                 .catch((err) => {
                   setItems(err);
                 });
-
-              // console.log(data);
             }}
           />
         </form>
