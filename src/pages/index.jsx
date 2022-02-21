@@ -110,7 +110,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header>
-        <PanelLogo>Gaulês Verso</PanelLogo>
+        <PanelLogo>
+          <Image
+            src={"/helmet.png"}
+            width={100}
+            height={100}
+            alt={"Gaules Capacete"}
+          ></Image>
+          <div style={{ marginLeft: "20px", width: "100px" }}>Gaulês Verso</div>
+        </PanelLogo>
         <form onSubmit={(e) => handleSubmit(e)} style={{ margin: "auto" }}>
           <input
             type="text"
