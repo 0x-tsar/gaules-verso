@@ -101,6 +101,23 @@ export default function Home() {
     done();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (!value) {
+        const done = async () => {
+          const { data } = await axios({
+            method: "get",
+            url: "http://localhost:5002/",
+          });
+
+          // console.log(data);
+          setItems(data);
+        };
+        done();
+      }
+    }, 200);
+  }, [value]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(value);
