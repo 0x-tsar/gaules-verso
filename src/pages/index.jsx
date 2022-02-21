@@ -158,11 +158,6 @@ export default function Home() {
         </form>
       </Header>
       <Main>
-        {/* {console.log(items)} */}
-        {/* {items ? <div>there is</div> : <div>NOT FOUND</div>} */}
-        {/* {items && items ? <div>there is</div> : <div>NOT FOUND</div>} */}
-
-        {/* {console.log(items.length)} */}
         {items && items ? (
           Object.keys(items).map((item, key) => {
             return (
@@ -175,22 +170,8 @@ export default function Home() {
             );
           })
         ) : (
-          // items.map((item, key) => {
-          //   return <div key={key}>ok</div>;
-          // })
           <div>nothing..</div>
         )}
-
-        {/* {console.log(Object.keys(items).length)} */}
-        {/* {console.log(items.length && items)} */}
-        {/* {console.log(items)} */}
-        {/* {items ? <div>THERE IS</div> : <div>zero</div>} */}
-        {/* {items.length > 1 ? <div>THERE IS</div> : <div>zero</div>} */}
-
-        {/* //
-        //
-        //
-        // */}
       </Main>
     </Container>
   );
