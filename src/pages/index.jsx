@@ -15,7 +15,7 @@ export const Container = styled.div`
   /* background-color: rgb(239, 141, 21); */
   /* background-color: #373b3e; */
   /* background: linear-gradient(rgba(200, 0, 200), rgba(100, 0, 200)); */
-  background: linear-gradient(100deg, rgba(200, 0, 200), rgb(239, 141, 21));
+  /* background: linear-gradient(100deg, rgba(200, 0, 200), rgb(239, 141, 21)); */
   color: white;
 `;
 
@@ -43,7 +43,7 @@ export const Main = styled.div`
   font-family: "Anonymous Pro", monospace, "Courier New", Courier;
 
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   flex-direction: column;
   align-items: center;
 
