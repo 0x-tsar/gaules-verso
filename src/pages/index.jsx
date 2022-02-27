@@ -15,7 +15,7 @@ export const Container = styled.div`
   /* background-color: rgb(239, 141, 21); */
   /* background-color: #373b3e; */
   /* background: linear-gradient(rgba(200, 0, 200), rgba(100, 0, 200)); */
-  /* background: linear-gradient(100deg, rgba(200, 0, 200), rgb(239, 141, 21)); */
+  /* background: linear-gradient(1li00deg, rgba(200, 0, 200), rgb(239, 141, 21)); */
   color: white;
 `;
 
@@ -62,15 +62,22 @@ export const PanelLogo = styled.h1`
   margin-left: 50px;
 `;
 
+export const getServerSideProps = async (ctx) => {
+  return {
+    props: [],
+  };
+};
+
 export default function Home() {
   const [items, setItems] = useState([]);
   const [value, setValue] = useState("");
+
   useEffect(() => {
     setItems([]);
     const done = async () => {
       const { data } = await axios({
         method: "get",
-        url: "http://localhost:5002/",
+        url: "https://api-gaules.herokuapp.com/",
       });
 
       // console.log(data);
@@ -85,10 +92,10 @@ export default function Home() {
         const done = async () => {
           const { data } = await axios({
             method: "get",
-            url: "http://localhost:5002/",
+            url: "https://api-gaules.herokuapp.com/",
+            // url: "http://localhost:5002/",
           });
 
-          // console.log(data);
           setItems(data);
         };
         done();
@@ -98,7 +105,6 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(value);
     setValue("");
   };
 
