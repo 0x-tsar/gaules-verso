@@ -62,11 +62,11 @@ export const PanelLogo = styled.h1`
   margin-left: 50px;
 `;
 
-export const getServerSideProps = async (ctx) => {
-  return {
-    props: [],
-  };
-};
+// export const getServerSideProps = async (ctx) => {
+//   return {
+//     props: [],
+//   };
+// };
 
 export default function Home() {
   const [items, setItems] = useState([]);
