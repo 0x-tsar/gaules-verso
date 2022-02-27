@@ -135,7 +135,7 @@ export default function Home() {
 
               await axios({
                 method: "get",
-                url: `http://localhost:5002/${e.currentTarget.value}`,
+                url: `https://api-gaules.herokuapp.com/${e.currentTarget.value}`,
               })
                 .then((result) => {
                   setItems(result.data);
