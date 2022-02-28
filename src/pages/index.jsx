@@ -148,6 +148,11 @@ export default function Home() {
         </form>
       </Header>
       <Main>
+        {items.length === 0 ? (
+          <div style={{ backgroundColor: "black" }}>LOADING DATABASE</div>
+        ) : (
+          <div></div>
+        )}
         {items && items ? (
           Object.keys(items).map((item, key) => {
             return (
