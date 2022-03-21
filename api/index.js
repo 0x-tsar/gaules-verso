@@ -44,7 +44,6 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/add", async (req, res) => {
-  //
   await mongoose.connect(
     `mongodb+srv://${process.env.ACCOUNT}:${process.env.PASSWORD}@apicluster.5xlor.mongodb.net/Gaules?retryWrites=true&w=majority`,
     {

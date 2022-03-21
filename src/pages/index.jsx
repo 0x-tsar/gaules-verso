@@ -80,7 +80,6 @@ export default function Home() {
         url: "https://api-gaules.herokuapp.com/",
       });
 
-      // console.log(data);
       setItems(data);
     };
     done();
